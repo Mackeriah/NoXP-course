@@ -23,7 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
         float maxDistanceToMove = speed * Time.deltaTime;
 
         // Find the new position we'll move to
-        Vector3 inputVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));  // direction player trying to move
+        Vector3 inputVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));  // direction player trying to move (x,y,z but we don't care about y so zero)
         Vector3 movementVector = inputVector * maxDistanceToMove;  // max disatnce player can move
         Vector3 newPosition = transform.position + movementVector; // where we will be moving TO
 
@@ -40,10 +40,9 @@ public class PlayerBehaviour : MonoBehaviour
         // If clicked, create a bullet at our current position
         if (Input.GetButton("Fire1"))
         {
-            Instantiate(bulletPrefeb, transform.position, transform.rotation);
-        }
-
-        
+            // Instantiate is a function and the stuff after are arguments
+            Instantiate(bulletPrefeb, transform.position + transform.forward, transform.rotation);
+        }       
  
 
     }
