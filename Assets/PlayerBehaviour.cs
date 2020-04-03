@@ -12,31 +12,27 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(speed);
+        Debug.Log(speed);        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        // Movement     
-        float maxDistanceToMove = speed * Time.deltaTime;
 
         // Find the new position we'll move to
         Vector3 inputVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));  // direction player trying to move (x,y,z but we don't care about y so zero)
-        Vector3 movementVector = inputVector * maxDistanceToMove;  // max disatnce player can move
-        Vector3 newPosition = transform.position + movementVector; // where we will be moving TO
 
-        transform.LookAt(newPosition);  // Face the new position
-        transform.position = newPosition;  // Actually move to the new position
+        // Ensure player physics will work
+        Rigidbody ourRigidBody = GetComponent<Rigidbody>();
 
-        // old movement code
-        // This is the equivilant of what you use in GM, as GetAxis is either 1 or 0
-        // transform.position += Vector3.forward * Input.GetAxis("Vertical") * maxDistanceToMove;
-        // transform.position += Vector3.right * Input.GetAxis("Horizontal") * maxDistanceToMove;
+        // Set our velocity
+        // (Velocity in a Physics sense is direction * speed)
+        ourRigidBody.velocity = inputVector * speed;
+
+        // Face the position the player is moving controller
+        Vector3 lookAtPosition = transform.position + inputVector;
+        transform.LookAt(lookAtPosition);
         
-
-        // Firing
         // If clicked, create a bullet at our current position
         if (Input.GetButton("Fire1"))
         {
