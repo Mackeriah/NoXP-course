@@ -22,8 +22,8 @@ public class enemyBehaviour : MonoBehaviour
 
         // Calculate direction and distance to travel to the player        
         Vector3 vectorToPlayer = player.transform.position - transform.position;
+
         // Use this as our velocity but normalize the value to 1 metre and then multiply by our speed
-        // (Velocity in a Physics sense is direction * speed)
         ourRigidBody.velocity = vectorToPlayer.normalized * speed;
 
     }
