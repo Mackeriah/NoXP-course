@@ -5,6 +5,7 @@ using UnityEngine;
 public class bulletBehaviour : MonoBehaviour
 {
     public float bulletSpeed;
+    public float secondsUntilDestroyed;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,27 @@ public class bulletBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log(secondsUntilDestroyed);
+
+        secondsUntilDestroyed -= Time.deltaTime;
+
+        // a fun way to make the bullets enlarge and pop out of existance!
+        /*if (secondsUntilDestroyed < 1)
+        {
+            transform.localScale = Vector3.one * secondsUntilDestroyed;
+        }*/
+
+        if (secondsUntilDestroyed < 1)
+        {
+            transform.localScale *= secondsUntilDestroyed;
+        }
+
+
+        if (secondsUntilDestroyed < 0)
+        {
+            Destroy(gameObject);
+        }
         
     }
 

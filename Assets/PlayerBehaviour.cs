@@ -8,16 +8,21 @@ public class PlayerBehaviour : MonoBehaviour
     // If you need to, set it in Start() instead
     public float speed;
     public GameObject bulletPrefeb;
+    public float secondsBetweenShots;   // assigned in Inspector
+    private float secondsSinceLastShot;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(speed);        
+        secondsSinceLastShot = secondsBetweenShots;  // this is essentially resetting on creation
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log("secondsBetweenShots: " + secondsBetweenShots);
+        Debug.Log("secondsSinceLastShot: " + secondsSinceLastShot);
 
         // Find the new position we'll move to
         Vector3 inputVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));  // direction player trying to move (x,y,z but we don't care about y so zero)
@@ -37,12 +42,16 @@ public class PlayerBehaviour : MonoBehaviour
         // Face the position the player is moving controller
         Vector3 lookAtPosition = cursorPosition;
         transform.LookAt(lookAtPosition);
-        
+
+        // track time since last shot
+        secondsSinceLastShot += Time.deltaTime;
+
         // If clicked, create a bullet at our current position
-        if (Input.GetButton("Fire1"))
+        if (secondsSinceLastShot >= secondsBetweenShots && Input.GetButton("Fire1")) 
         {
             // Instantiate is a function and the stuff after are arguments
             Instantiate(bulletPrefeb, transform.position + transform.forward, transform.rotation);
+            secondsSinceLastShot = 0;
         }       
  
 
