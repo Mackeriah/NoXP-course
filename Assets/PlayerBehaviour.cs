@@ -14,6 +14,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        References.thePlayer = gameObject;
         secondsSinceLastShot = secondsBetweenShots;  // this is essentially resetting on creation
     }
 

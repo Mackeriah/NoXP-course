@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class enemyBehaviour : MonoBehaviour
 {
-    // Track the player's position
-    public GameObject player;
     public float speed;
 
     // Start is called before the first frame update
@@ -21,7 +19,8 @@ public class enemyBehaviour : MonoBehaviour
         Rigidbody ourRigidBody = GetComponent<Rigidbody>();
 
         // Calculate direction and distance to travel to the player        
-        Vector3 vectorToPlayer = player.transform.position - transform.position;
+        // Note we're using the whole Static thing in References
+        Vector3 vectorToPlayer = References.thePlayer.transform.position - transform.position;
 
         // Use this as our velocity but normalize the value to 1 metre and then multiply by our speed
         ourRigidBody.velocity = vectorToPlayer.normalized * speed;
