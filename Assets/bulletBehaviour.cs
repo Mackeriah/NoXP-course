@@ -25,11 +25,12 @@ public class bulletBehaviour : MonoBehaviour
         secondsUntilDestroyed -= Time.deltaTime;
 
         // a fun way to make the bullets enlarge and pop out of existance!
-        /*if (secondsUntilDestroyed < 1)
+       if (secondsUntilDestroyed < 1)
         {
             transform.localScale = Vector3.one * secondsUntilDestroyed;
-        }*/
+        }
 
+/*
         if (secondsUntilDestroyed < 1)
         {
             transform.localScale *= secondsUntilDestroyed;
@@ -39,7 +40,7 @@ public class bulletBehaviour : MonoBehaviour
         if (secondsUntilDestroyed < 0)
         {
             Destroy(gameObject);
-        }
+        }*/
         
     }
 
