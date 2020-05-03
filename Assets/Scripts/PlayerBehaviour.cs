@@ -7,7 +7,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Never set the value of a public variable in code - a different value in the inspector will override the code without telling you
     // If you need to, set it in Start() instead
     public float speed;
-    public GameObject bulletPrefeb;
+    public GameObject bulletPrefab;
     public float secondsBetweenShots;   // assigned in Inspector
     private float secondsSinceLastShot;
 
@@ -51,7 +51,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (secondsSinceLastShot >= secondsBetweenShots && Input.GetButton("Fire1")) 
         {
             // Instantiate is a function and the stuff after are arguments
-            Instantiate(bulletPrefeb, transform.position + transform.forward, transform.rotation);
+            Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation);
             secondsSinceLastShot = 0;
         }       
  
