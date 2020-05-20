@@ -21,10 +21,6 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log("secondsBetweenShots: " + secondsBetweenShots);
-        Debug.Log("secondsSinceLastShot: " + secondsSinceLastShot);
-
         // Find the new position we'll move to
         Vector3 inputVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));  // direction player trying to move (x,y,z but we don't care about y so zero)
         
