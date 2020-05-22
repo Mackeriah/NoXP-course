@@ -8,6 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
     // If you need to, set it in Start() instead
     public float speed;
     public GameObject bulletPrefab;
+
     public float secondsBetweenShots;   // assigned in Inspector
     private float secondsSinceLastShot;
 
