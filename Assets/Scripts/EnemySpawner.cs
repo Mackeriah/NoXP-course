@@ -21,10 +21,16 @@ public class EnemySpawner : MonoBehaviour
     {
         secondsSinceLastSpawn += Time.deltaTime;
 
-        if (secondsSinceLastSpawn >= secondsBetweenSpawns)
+        // if the player still exists
+        if (References.thePlayer != null)
         {
-            Instantiate(enemyPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
-            secondsSinceLastSpawn = 0;
+            if (secondsSinceLastSpawn >= secondsBetweenSpawns)
+            {
+                Instantiate(enemyPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                secondsSinceLastSpawn = 0;
+            }
         }
+        
+        
     }
 }

@@ -16,7 +16,7 @@ public class enemyBehaviour : MonoBehaviour
     void Update()
     {
         
-        if (References.thePlayer != null)  // if the player exists
+        if (References.thePlayer != null)  // if the player exists 
         {
             // Ensure enemy physics will work
             Rigidbody ourRigidBody = GetComponent<Rigidbody>();

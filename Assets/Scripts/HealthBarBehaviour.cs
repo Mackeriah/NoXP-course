@@ -16,19 +16,5 @@ public class HealthBarBehaviour : MonoBehaviour
         // scales the filled part to the fraction provided
         filledPart.rectTransform.localScale = new Vector3(fraction, 1, 1);
     }
-/*
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }*/
 }

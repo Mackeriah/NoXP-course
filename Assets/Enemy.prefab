@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49d67e982f9d5346a9e9e40962c4074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 2
   healthBarPrefab: {fileID: 7554676238214814805, guid: 6f7a5522c56698d488a213891071da6b,
+    type: 3}
+  deathEffectPrefab: {fileID: 8896885027408864494, guid: e676d2db326e57b49accddbc3edae9b3,
     type: 3}

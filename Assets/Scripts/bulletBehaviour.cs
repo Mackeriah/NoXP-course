@@ -20,9 +20,6 @@ public class bulletBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log(secondsUntilDestroyed);
-
         secondsUntilDestroyed -= Time.deltaTime;
 
         // a fun way to make the bullets enlarge and pop out of existance!
