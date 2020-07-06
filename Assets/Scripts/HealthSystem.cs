@@ -35,17 +35,21 @@ public class HealthSystem : MonoBehaviour
     // damageAmount is where we'll store the value passed to us by the object calling this function (the bullet I believe)
     // Any GameObject that has the HealthSystem component will have a health variable and will use this code
     {
-        currentHealth -= damageAmount;
-        if (currentHealth <= 0)
+        if (currentHealth > 0) // make sure we're not already dead!
         {
-            // if my death effect prefab exists (currently only enemies have this prefab dragged to the slot, so the player doesn't explode)
-            if (deathEffectPrefab != null)
+            currentHealth -= damageAmount;
+            if (currentHealth <= 0)
             {
-                Instantiate(deathEffectPrefab, transform.position, transform.rotation);
-            }
+                // if my death effect prefab exists (currently only enemies have this prefab dragged to the slot, so the player doesn't explode)
+                if (deathEffectPrefab != null)
+                {
+                    Instantiate(deathEffectPrefab, transform.position, transform.rotation);
+                }
 
-            Destroy(gameObject);
+                Destroy(gameObject);
+            }
         }
+        
     }
 
     private void OnDestroy()
