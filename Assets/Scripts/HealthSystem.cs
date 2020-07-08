@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 public class HealthSystem : MonoBehaviour
-// The above HealthSystem is a new component (AKA Script) we've created
+// The above HealthSystem is a CLASS (or component or Script!) we've created
 // this also means we've created a new datatype "HealthSystem" (like float, vector or GameObject)
 
 {
