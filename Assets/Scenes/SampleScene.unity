@@ -250,7 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7286637064885884988, guid: fbfb44bdfa1a8694e851cc5cf5df3e2b,
     type: 3}
-  accuracy: 50
+  accuracy: 5
   secondsBetweenShots: 1
   numberOfProjectiles: 10
 --- !u!1 &77096088
@@ -1716,7 +1716,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  myWeapon: {fileID: 2059024388}
+  weapons:
+  - {fileID: 2059024388}
+  - {fileID: 681544487}
+  - {fileID: 58788990}
+  selectedWeaponIndex: 0
   secondsBetweenShots: 0.2
 --- !u!65 &1554521900
 BoxCollider:

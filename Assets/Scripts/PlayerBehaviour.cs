@@ -5,16 +5,14 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     public float speed;
-    public WeaponBehaviour myWeapon;
-
-    public float secondsBetweenShots;   // assigned in Inspector
-    private float secondsSinceLastShot;
+    public List<WeaponBehaviour> weapons = new List<WeaponBehaviour>();
+    public int selectedWeaponIndex;
 
     // Start is called before the first frame update
     void Start()
     {
         References.thePlayer = gameObject;
-        secondsSinceLastShot = secondsBetweenShots;  // this is essentially resetting on creation
+        selectedWeaponIndex = 0;
     }
 
     // Update is called once per frame
@@ -41,12 +39,22 @@ public class PlayerBehaviour : MonoBehaviour
 
         
         // Firing
-        if (Input.GetButton("Fire1")) 
+        if (Input.GetButton("Fire1")) // Fire1 is LMB
         {
             // Tell our weapon to fire (using the Class "Fire" which is assigned to the weapon) using our cursor position as an argument
-            myWeapon.Fire(cursorPosition);
-        } 
- 
+            weapons[selectedWeaponIndex].Fire(cursorPosition);
+        }
+
+        // Firing
+        if (Input.GetButton("Fire2")) // Fire1 is RMB
+        {
+            selectedWeaponIndex += 1;
+            if (selectedWeaponIndex >= weapons.Count)  // if we're trying to select beyond the available weapon slots
+            {
+                selectedWeaponIndex = 0;  // go to first weapon slot
+            }
+        }
+
 
     }
 }

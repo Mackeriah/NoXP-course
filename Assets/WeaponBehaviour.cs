@@ -39,11 +39,12 @@ public class WeaponBehaviour : MonoBehaviour
 
                 // Offset target position by random amount according to our inaccuracy which increases the further away the target is
                 float inaccuracy = Vector3.Distance(transform.position, targetPosition) / accuracy;
-                targetPosition.x += Random.Range(-inaccuracy, inaccuracy);
-                targetPosition.z += Random.Range(-inaccuracy, inaccuracy);
+                Vector3 inaccuratePosition = targetPosition;
+                inaccuratePosition.x += Random.Range(-inaccuracy, inaccuracy);
+                inaccuratePosition.z += Random.Range(-inaccuracy, inaccuracy);
 
                 // Look at target position 
-                newBullet.transform.LookAt(targetPosition);
+                newBullet.transform.LookAt(inaccuratePosition);
 
                 // Reset timer
                 secondsSinceLastShot = 0;
