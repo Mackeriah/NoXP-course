@@ -8,6 +8,7 @@ public class WeaponBehaviour : MonoBehaviour
     public GameObject bulletPrefab;
     public float accuracy;
     public float secondsBetweenShots;
+    public float numberOfProjectiles;
     private float secondsSinceLastShot;
 
 
@@ -30,19 +31,23 @@ public class WeaponBehaviour : MonoBehaviour
         // Check enough time has passed
         if (secondsSinceLastShot >= secondsBetweenShots)
         {
-            // Create bullet and store in variable
-            GameObject newBullet = Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation);
+            // Create bullet(s) and store in variable
 
-            // Offset target position by random amount according to our inaccuracy which increases the further away the target is
-            float inaccuracy = Vector3.Distance(transform.position, targetPosition) / accuracy;
-            targetPosition.x += Random.Range(-inaccuracy, inaccuracy);
-            targetPosition.z += Random.Range(-inaccuracy, inaccuracy);
+            for (int i = 0; i < numberOfProjectiles; i++)
+            {
+                GameObject newBullet = Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation);
 
-            // Look at target position 
-            newBullet.transform.LookAt(targetPosition);
+                // Offset target position by random amount according to our inaccuracy which increases the further away the target is
+                float inaccuracy = Vector3.Distance(transform.position, targetPosition) / accuracy;
+                targetPosition.x += Random.Range(-inaccuracy, inaccuracy);
+                targetPosition.z += Random.Range(-inaccuracy, inaccuracy);
 
-            // Reset timer
-            secondsSinceLastShot = 0;
+                // Look at target position 
+                newBullet.transform.LookAt(targetPosition);
+
+                // Reset timer
+                secondsSinceLastShot = 0;
+            }                        
         }
     }
 
