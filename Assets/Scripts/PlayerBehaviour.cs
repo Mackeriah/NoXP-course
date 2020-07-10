@@ -39,14 +39,14 @@ public class PlayerBehaviour : MonoBehaviour
 
         
         // Firing
-        if (Input.GetButton("Fire1")) // Fire1 is LMB
+        if (weapons.Count > 0 && Input.GetButton("Fire1")) // Fire1 is LMB
         {
             // Tell our weapon to fire (using the Class "Fire" which is assigned to the weapon) using our cursor position as an argument
             weapons[selectedWeaponIndex].Fire(cursorPosition);
         }
 
         // Firing
-        if (Input.GetButton("Fire2")) // Fire1 is RMB
+        if (Input.GetButtonDown("Fire2")) // Fire1 is RMB
         {
             selectedWeaponIndex += 1;
             if (selectedWeaponIndex >= weapons.Count)  // if we're trying to select beyond the available weapon slots
@@ -57,4 +57,20 @@ public class PlayerBehaviour : MonoBehaviour
 
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // when we collide with something, ask it if it's PARENT has a WeaponBehaviour and if it does, return the weapon
+        WeaponBehaviour theirWeapon = other.GetComponentInParent<WeaponBehaviour>();
+        if (theirWeapon != null)
+        {
+            weapons.Add(theirWeapon);
+            theirWeapon.transform.position = transform.position;
+            theirWeapon.transform.rotation = transform.rotation;
+            theirWeapon.transform.SetParent(transform);
+        }
+
+    }
+
+
 }
