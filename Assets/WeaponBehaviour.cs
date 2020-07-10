@@ -12,27 +12,25 @@ public class WeaponBehaviour : MonoBehaviour
     private float secondsSinceLastShot;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         // reset firing timing
         secondsSinceLastShot = secondsBetweenShots;  
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         // Track how long since last shot
         secondsSinceLastShot += Time.deltaTime;
     }
 
+
     public void Fire(Vector3 targetPosition)  // this is our weapon class, target position accepts a v3 which currently is the mouse cursor position (cursorPosition)
     {
-        // Check enough time has passed
         if (secondsSinceLastShot >= secondsBetweenShots)
         {
             // Create bullet(s) and store in variable
-
             for (int i = 0; i < numberOfProjectiles; i++)
             {
                 GameObject newBullet = Instantiate(bulletPrefab, transform.position + transform.forward, transform.rotation);
