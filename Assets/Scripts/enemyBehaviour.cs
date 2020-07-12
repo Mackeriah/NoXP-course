@@ -1,32 +1,54 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class enemyBehaviour : MonoBehaviour
 {
     public float speed;
+    public float visionRange;
+    public float visionConeAngle;
+    public bool alerted;
+    Rigidbody ourRigidBody;
+    public Light myLight;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        alerted = false;
+        ourRigidBody = GetComponent<Rigidbody>();  // this is split across the top section and here, so that we can streamline our code, as we use it in 'alerted'
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        if (References.thePlayer != null)  // if the player exists 
+        if (References.thePlayer != null)  // does player exist?
         {
-            // Ensure enemy physics will work
-            Rigidbody ourRigidBody = GetComponent<Rigidbody>();
+            Vector3 playerPosition = References.thePlayer.transform.position; // store player position
+            Vector3 vectorToPlayer = References.thePlayer.transform.position - transform.position;  // angle from us to player
+            myLight.color = Color.white;
 
+            if (alerted)
+            {
+                // Follow the player
+                ourRigidBody.velocity = vectorToPlayer.normalized * speed;
+                transform.LookAt(playerPosition);
+            }
+            else
+            {
+                // check if we can see the player
+                if (Vector3.Distance(transform.position, playerPosition) <= visionRange)  // is the player in range?
+                {
+                    if (Vector3.Angle(transform.forward, vectorToPlayer) <= visionConeAngle)  // and in our cone?
+                    {
+                        //alerted = true;
+                        myLight.color = Color.red;
 
-            // Calculate direction and distance to travel to the player (Note we're using the whole Static thing in References)
-            Vector3 vectorToPlayer = References.thePlayer.transform.position - transform.position;
+                    }
+                }
 
-            // Use this as our velocity but normalize the value to 1 metre and then multiply by our speed
-            ourRigidBody.velocity = vectorToPlayer.normalized * speed;
+            }
         }
         
     }
