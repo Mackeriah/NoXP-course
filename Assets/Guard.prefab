@@ -208,11 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8235e6669a4bc4e8e6d427bb51849b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 2
   visionRange: 9
   visionConeAngle: 30
   alerted: 0
   myLight: {fileID: 8551143906101177985}
+  guardRotateSpeed: 2
 --- !u!54 &8551143907327257593
 Rigidbody:
   m_ObjectHideFlags: 0

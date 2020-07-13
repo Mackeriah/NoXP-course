@@ -11,6 +11,7 @@ public class enemyBehaviour : MonoBehaviour
     public bool alerted;
     Rigidbody ourRigidBody;
     public Light myLight;
+    public int guardRotateSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -34,17 +35,20 @@ public class enemyBehaviour : MonoBehaviour
                 // Follow the player
                 ourRigidBody.velocity = vectorToPlayer.normalized * speed;
                 transform.LookAt(playerPosition);
+                myLight.color = Color.red;
             }
             else
             {
+                // Guard rotation
+                Vector3 lateralOffset = transform.right * Time.deltaTime * guardRotateSpeed;
+                transform.LookAt(transform.position + transform.forward + lateralOffset);
+
                 // check if we can see the player
                 if (Vector3.Distance(transform.position, playerPosition) <= visionRange)  // is the player in range?
                 {
                     if (Vector3.Angle(transform.forward, vectorToPlayer) <= visionConeAngle)  // and in our cone?
                     {
-                        //alerted = true;
-                        myLight.color = Color.red;
-
+                        alerted = true;                      
                     }
                 }
 
