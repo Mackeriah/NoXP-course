@@ -34,7 +34,10 @@ public class enemyBehaviour : MonoBehaviour
             {
                 // Follow the player
                 ourRigidBody.velocity = vectorToPlayer.normalized * speed;
-                transform.LookAt(playerPosition);
+                // this makes us only look at the players x and z positions, which means we won't get tilting on our x and y, we'll only rotate on our y axis to face them
+                // this was a bug fix by Tom, as even though we have our x and z rotation locked, the original LookAt code was overwriting this
+                Vector3 playerPositionAtOurHeight = new Vector3(playerPosition.x, transform.position.y, playerPosition.z);
+                transform.LookAt(playerPositionAtOurHeight);
                 myLight.color = Color.red;
             }
             else
@@ -42,6 +45,7 @@ public class enemyBehaviour : MonoBehaviour
                 // Guard rotation
                 Vector3 lateralOffset = transform.right * Time.deltaTime * guardRotateSpeed;
                 transform.LookAt(transform.position + transform.forward + lateralOffset);
+                ourRigidBody.velocity = transform.forward * speed;  // walk in a circle
 
                 // check if we can see the player
                 if (Vector3.Distance(transform.position, playerPosition) <= visionRange)  // is the player in range?
